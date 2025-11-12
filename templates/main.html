@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ data.main_info.title }}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Malgun Gothic', 'Dotum', sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container { 
+            max-width: 900px; 
+            width: 100%;
+            background-color: #fff; 
+            padding: 40px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); 
+        }
+        h1 { 
+            text-align: center; 
+            color: #333; 
+            font-size: 2.5em; 
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1em;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .nav-links { 
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px; 
+            margin-top: 30px; 
+            justify-content: center;
+        }
+        .nav-links a { 
+            text-decoration: none; 
+            color: #fff; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 25px; 
+            border-radius: 8px; 
+            text-align: center; 
+            font-size: 1.1em; 
+            font-weight: bold; 
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            min-width: 180px;
+        }
+        .nav-links a:hover { 
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        .api-info { 
+            text-align: center; 
+            margin-top: 40px; 
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #666; 
+            font-size: 0.9em; 
+        }
+        .api-info strong { color: #333; }
+        .api-examples {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .api-examples a { 
+            color: #667eea; 
+            text-decoration: none;
+            padding: 5px 15px;
+            background: #f5f5f5;
+            border-radius: 5px;
+            font-size: 0.85em;
+            transition: all 0.3s;
+        }
+        .api-examples a:hover {
+            background: #667eea;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ data.main_info.title }}</h1>
+        <div class="subtitle">{{ data.main_info.subtitle }}</div>
+        
+        <div class="nav-links">
+            {% for title, key in page_map.items() %}
+            <a href="/{{ key }}">{{ title }}</a>
+            {% endfor %}
+        </div>
+        
+        <div class="api-info">
+            <strong>API(Application Programming Interface):</strong> /api/subject, /api/rationale, /api/features, /api/environment, /api/team
+            <div class="api-examples">
+                <a href="/api/subject" target="_blank">/api/subject</a>
+                <a href="/api/rationale" target="_blank">/api/rationale</a>
+                <a href="/api/features" target="_blank">/api/features</a>
+                <a href="/api/environment" target="_blank">/api/environment</a>
+                <a href="/api/team" target="_blank">/api/team</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

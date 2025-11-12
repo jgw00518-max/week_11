@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_data.title }}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Malgun Gothic', 'Dotum', sans-serif; 
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        .container { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            background-color: #fff; 
+            padding: 40px; 
+            border-radius: 10px; 
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+        }
+        
+        /* 페이지 제목 */
+        .page-title { 
+            font-size: 2.5em; 
+            color: #333; 
+            margin-bottom: 30px;
+            font-weight: bold;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        /* 콘텐츠 섹션 */
+        .content-section { 
+            margin-top: 30px;
+            line-height: 1.8;
+        }
+        .content-section h2 { 
+            font-size: 1.5em; 
+            color: #667eea; 
+            margin-bottom: 10px;
+            margin-top: 25px;
+        }
+        .content-section h2:first-child {
+            margin-top: 0;
+        }
+        .content-section p { 
+            color: #555; 
+            margin-bottom: 20px;
+            padding-left: 15px;
+            font-size: 1.1em;
+        }
+        
+        /* 리스트 스타일 */
+        .item-list { 
+            list-style: none; 
+            padding: 0;
+            margin-top: 20px;
+        }
+        .item-list li { 
+            background-color: #f9f9f9; 
+            margin-bottom: 12px; 
+            padding: 18px 20px; 
+            border-left: 5px solid #667eea; 
+            border-radius: 5px;
+            font-size: 1.1em;
+            color: #333;
+        }
+        .item-list li:before {
+            content: "• ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        /* 팀원 리스트 특별 스타일 */
+        .team-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .team-item .name {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.2em;
+        }
+        .team-item .role {
+            color: #666;
+        }
+        
+        /* 뒤로가기 버튼 */
+        .back-link { 
+            display: inline-block;
+            margin-top: 40px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        .back-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        .back-link:before {
+            content: "← ";
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="page-title">{{ page_data.title }}</h1>
+
+        <div class="content-section">
+            {% set data = page_data.data %}
+
+            {% if data is mapping %}
+                {% for key, value in data.items() %}
+                    <h2>{{ key }}</h2>
+                    <p>{{ value }}</p>
+                {% endfor %}
+            
+            {% elif data is iterable and data is not string %}
+                <ul class="item-list">
+                {% for item in data %}
+                    <li>
+                        {% if page_data.title == "핵심기능" %}
+                            {{ item.desc }}
+                        {% elif page_data.title == "팀원 구성 및 역할" %}
+                            <div class="team-item">
+                                <span class="name">{{ item.name }}</span>
+                                <span class="role">{{ item.role }}</span>
+                            </div>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        
+        <a href="/main" class="back-link">홈</a>
+    </div>
+</body>
+</html>
